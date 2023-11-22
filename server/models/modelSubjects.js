@@ -15,12 +15,11 @@ const Subjects = db.define(
   },
   {
     freezeTableName: true,
+    timestamps: false,
   }
 );
 
-Subjects.hasMany(Students, { foreignKey: "subjectId" });
-
+Subjects.hasOne(Grades, { foreignKey: "subjectId" });
 Grades.belongsTo(Subjects, { foreignKey: "subjectId" });
-Students.belongsTo(Subjects, { foreignKey: "subjectId" });
 
 export default Subjects;

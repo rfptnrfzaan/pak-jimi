@@ -2,18 +2,20 @@
 
 import db from "../config/database.js";
 import { Sequelize } from "sequelize";
-import Subjects from "./modelSubjects.js";
-import Students from "./modelStudents.js";
+import Report from "./modelReport.js";
 
 const { DataTypes } = Sequelize;
 
 const Grades = db.define(
   "grades",
   {
-    grade: DataTypes.STRING,
+    jenis_nilai: DataTypes.STRING,
+    nilai: DataTypes.STRING,
+    semester: DataTypes.STRING,
   },
   {
     freezeTableName: true,
+    timestamps: false,
   }
 );
 
