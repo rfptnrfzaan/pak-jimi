@@ -3,7 +3,6 @@
 import db from "../config/database.js";
 import { Sequelize } from "sequelize";
 import Grades from "./modelGrades.js";
-import Students from "./modelStudents.js";
 
 const Report = db.define(
   "report",
@@ -14,7 +13,7 @@ const Report = db.define(
   }
 );
 
-Grades.hasMany(Report, { foreignKey: "gradesId" });
+Grades.hasMany(Report);
 Report.belongsTo(Grades, { foreignKey: "gradesId" });
 
 export default Report;

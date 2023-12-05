@@ -13,7 +13,12 @@ import Teachers from "./models/modelTeachers.js";
 import Grades from "./models/modelGrades.js";
 import Subjects from "./models/modelSubjects.js";
 
+import accountRoute from "./routes/accountRoute.js";
+import gradeRoute from "./routes/gradeRoute.js";
+import reportRoute from "./routes/reportRoute.js";
 import studentsRoute from "./routes/studentsRoute.js";
+import subjectRoute from "./routes/subjectRoute.js";
+import teachersRoute from "./routes/teachersRoute.js";
 
 const app = express();
 
@@ -22,7 +27,12 @@ app.use(express.json());
 app.use(fileUpload());
 app.use(express.static("public"));
 
+app.use(accountRoute);
+app.use(gradeRoute);
+app.use(reportRoute);
 app.use(studentsRoute);
+app.use(subjectRoute);
+app.use(teachersRoute);
 
 try {
   await db.authenticate();

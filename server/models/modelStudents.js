@@ -24,17 +24,17 @@ const Students = db.define(
   }
 );
 
-Students.hasMany(Subjects);
-Subjects.belongsTo(Students, { foreignKey: "subjectId" });
+Students.hasMany(Subjects, { foreignKey: "subjectId" });
+Subjects.belongsTo(Students);
 
 Students.hasMany(Grades, { foreignKey: "studentId" });
-Grades.belongsTo(Students, { foreignKey: "gradeId" });
+Grades.belongsTo(Students);
 
 Students.hasOne(Report, {
   foreignKey: "studentId",
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
-Report.belongsTo(Students, { foreignKey: "reportId" });
+Report.belongsTo(Students);
 
 export default Students;

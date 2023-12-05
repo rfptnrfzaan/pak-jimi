@@ -58,7 +58,7 @@ export const saveStudents = async (req, res) => {
       alamat: alamat,
       tanggal_lahir: tanggal_lahir,
     });
-    res.status(201).json({ msg: "Students Created Succesfully!" });
+    res.status(201).json({ msg: "Student Created Succesfully!" });
   } catch (error) {
     console.log(error.message);
   }

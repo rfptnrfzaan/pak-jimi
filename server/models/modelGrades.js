@@ -2,7 +2,6 @@
 
 import db from "../config/database.js";
 import { Sequelize } from "sequelize";
-import Report from "./modelReport.js";
 
 const { DataTypes } = Sequelize;
 
