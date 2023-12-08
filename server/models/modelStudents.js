@@ -18,6 +18,10 @@ const Students = db.define(
       type: DataTypes.DATEONLY,
       defaultValue: DataTypes.NOW,
     },
+    password: DataTypes.STRING,
+    refresh_token: {
+      type: DataTypes.TEXT,
+    },
   },
   {
     freezeTableName: true,

@@ -1,0 +1,30 @@
+GET http://localhost:5000/users
+Authorization: Bearer 
+
+###
+POST  http://localhost:5000/student/register
+Content-Type: application/json
+
+{
+    "nomor_induk": "Dhendi",
+    "nama": "ema@gmail.com",
+    "alamat": "Jl. yang mana aja aku ada",
+    "tanggal_lahir": "1/1/1",
+    "password": "123456",
+    "confirmPassword": "123456"
+}
+
+###
+POST  http://localhost:5000/student/login
+Content-Type: application/json
+
+{
+    "nomor_induk": "Dhendi",
+    "password": "123456"
+}
+
+###
+GET  http://localhost:5000/token
+
+###
+DELETE  http://localhost:5000/logout

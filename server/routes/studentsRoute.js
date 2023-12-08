@@ -5,15 +5,17 @@ import express from "express";
 import {
   getStudents,
   getStudentsById,
-  saveStudents,
+  RegisterStudent,
+  LoginStudent,
   deleteStudents,
-} from "../controllers/studentsController.js";
+} from "../controllers/Student/studentsController.js";
 
 const router = express.Router();
 
 router.get("/student", getStudents);
 router.get("/student/:nomor_induk", getStudentsById);
-router.post("/student", saveStudents);
+router.post("/student/register", RegisterStudent);
+router.post("/student/login", LoginStudent);
 router.delete("/student/:nomor_induk", deleteStudents);
 
 export default router;

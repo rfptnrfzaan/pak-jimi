@@ -6,6 +6,9 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import { Sequelize } from "sequelize";
 
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
 import Account from "./models/modelAccount.js";
 import Students from "./models/modelStudents.js";
 import Report from "./models/modelReport.js";
@@ -20,11 +23,13 @@ import studentsRoute from "./routes/studentsRoute.js";
 import subjectRoute from "./routes/subjectRoute.js";
 import teachersRoute from "./routes/teachersRoute.js";
 
+dotenv.config();
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(fileUpload());
+app.use(cookieParser());
+app.use(express.json());
 app.use(express.static("public"));
 
 app.use(accountRoute);

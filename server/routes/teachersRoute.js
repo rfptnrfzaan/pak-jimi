@@ -7,7 +7,7 @@ import {
   getTeachersById,
   saveTeachers,
   deleteTeachers,
-} from "../controllers/teacherController.js";
+} from "../controllers/Teacher/teacherController.js";
 
 const router = express.Router();
 
