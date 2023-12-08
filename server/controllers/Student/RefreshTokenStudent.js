@@ -6,19 +6,36 @@ import jwt from "jsonwebtoken";
 export const refreshTokenStudent = async (req, res) => {
   try {
     const refreshTokenStudent = req.cookies.refreshToken;
-    if (!refreshTokenStudent) return res.sendStatus(401);
+
+    console.log("Received refreshToken cookie:", refreshTokenStudent);
+
+    if (!refreshTokenStudent) {
+      return res.sendStatus(401);
+    }
+
     const student = await Students.findAll({
       where: {
         refresh_token: refreshTokenStudent,
       },
     });
-    if (!student[0]) return res.sendStatus(403);
+
+    console.log("Student found:", student);
+
+    if (!student[0]) {
+      return res.sendStatus(403);
+    }
 
     jwt.verify(
       refreshTokenStudent,
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
-        if (err) return res.sendStatus(403);
+        console.log("Decoded refreshToken:", decoded);
+
+        if (err) {
+          console.error("Error verifying refresh token:", err);
+          return res.sendStatus(403);
+        }
+
         const studentId = student[0].id;
         const nama = student[0].nama;
         const nomor_induk = student[0].nomor_induk;
@@ -27,13 +44,16 @@ export const refreshTokenStudent = async (req, res) => {
           { studentId, nama, nomor_induk },
           process.env.ACCESS_TOKEN_SECRET,
           {
-            expiresIn: "15s",
+            expiresIn: "15m", // Adjust the expiration time as needed
           }
         );
+
         res.json({ accessTokenStudent });
+        // res.clearCookie("refreshToken");
       }
     );
   } catch (error) {
-    console.log(error);
+    console.error("Error refreshing token:", error);
+    res.sendStatus(500); // Internal Server Error
   }
 };

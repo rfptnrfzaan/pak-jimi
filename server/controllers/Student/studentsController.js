@@ -47,24 +47,24 @@ export const deleteStudents = async (req, res) => {
   }
 };
 
-export const saveStudents = async (req, res) => {
-  const nomor_induk = req.body.nomor_induk;
-  const nama = req.body.nama;
-  const alamat = req.body.alamat;
-  const tanggal_lahir = req.body.tanggal_lahir;
+// export const saveStudents = async (req, res) => {
+//   const nomor_induk = req.body.nomor_induk;
+//   const nama = req.body.nama;
+//   const alamat = req.body.alamat;
+//   const tanggal_lahir = req.body.tanggal_lahir;
 
-  try {
-    await Students.create({
-      nomor_induk: nomor_induk,
-      nama: nama,
-      alamat: alamat,
-      tanggal_lahir: tanggal_lahir,
-    });
-    res.status(201).json({ msg: "Student Created Succesfully!" });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+//   try {
+//     await Students.create({
+//       nomor_induk: nomor_induk,
+//       nama: nama,
+//       alamat: alamat,
+//       tanggal_lahir: tanggal_lahir,
+//     });
+//     res.status(201).json({ msg: "Student Created Succesfully!" });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
 export const RegisterStudent = async (req, res) => {
   const {
@@ -163,5 +163,42 @@ export const LoginStudent = async (req, res) => {
   } catch (error) {
     console.log("Error:", error);
     res.status(404).json({ msg: "NIK Tidak Ditemukan" });
+  }
+};
+
+export const LogOutStudent = async (req, res) => {
+  try {
+    const refreshTokenStudent = req.cookies.refreshToken;
+
+    if (!refreshTokenStudent) {
+      return res.sendStatus(204); // No refresh token, consider sending 204 or another appropriate status
+    }
+
+    const student = await Students.findAll({
+      where: {
+        refresh_token: refreshTokenStudent,
+      },
+    });
+
+    if (!student[0]) {
+      return res.sendStatus(404); // No student found with the provided refresh token
+    }
+
+    const studentId = student[0].id;
+
+    await Students.update(
+      { refresh_token: null },
+      {
+        where: {
+          id: studentId,
+        },
+      }
+    );
+
+    res.clearCookie("refreshToken");
+    return res.sendStatus(200); // Successfully logged out
+  } catch (error) {
+    console.log("Error:", error);
+    return res.sendStatus(500); // Internal Server Error
   }
 };
