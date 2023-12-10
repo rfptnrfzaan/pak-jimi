@@ -47,24 +47,25 @@ export const deleteStudents = async (req, res) => {
   }
 };
 
-// export const saveStudents = async (req, res) => {
-//   const nomor_induk = req.body.nomor_induk;
-//   const nama = req.body.nama;
-//   const alamat = req.body.alamat;
-//   const tanggal_lahir = req.body.tanggal_lahir;
+export const saveStudents = async (req, res) => {
+  const nomor_induk = req.body.nomor_induk;
+  const nama = req.body.nama;
+  const alamat = req.body.alamat;
+  const tanggal_lahir = req.body.tanggal_lahir;
 
-//   try {
-//     await Students.create({
-//       nomor_induk: nomor_induk,
-//       nama: nama,
-//       alamat: alamat,
-//       tanggal_lahir: tanggal_lahir,
-//     });
-//     res.status(201).json({ msg: "Student Created Succesfully!" });
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
+  try {
+    await Students.create({
+      nomor_induk: nomor_induk,
+      nama: nama,
+      alamat: alamat,
+      tanggal_lahir: tanggal_lahir,
+    });
+    res.status(201).json({ msg: "Student Created Succesfully!" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 
 export const RegisterStudent = async (req, res) => {
   const {

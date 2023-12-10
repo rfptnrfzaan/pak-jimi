@@ -1,3 +1,4 @@
+##Student##
 GET http://localhost:5000/student
 Authorization: Bearer 
 
@@ -27,4 +28,36 @@ Content-Type: application/json
 GET  http://localhost:5000/student/token
 
 ###
-DELETE  http://localhost:/logout/student
+DELETE  http://localhost:5000/logout/student
+
+##Teacher##
+GET http://localhost:5000/teacher
+Authorization: Bearer 
+
+###
+POST  http://localhost:5000/register/teacher
+Content-Type: application/json
+
+{
+    "nomor_unik": "12334",
+    "nama": "email@gmail.com",
+    "alamat": "Jl. yang mana aja aku ada",
+    "tanggal_lahir": "1/1/1",
+    "password": "123456",
+    "confirmPassword": "123456"
+}
+
+###
+POST  http://localhost:5000/login/teacher
+Content-Type: application/json
+
+{
+    "nomor_unik": "12334",
+    "password": "123456"
+}
+
+###
+GET  http://localhost:5000/token/teacher
+
+###
+DELETE  http://localhost:5000/logout/teacher
